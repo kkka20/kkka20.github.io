@@ -24,8 +24,7 @@ export const siteConfig = {
   owner: "CnBarrier",
 
   // 头像链接
-  gravatarUrl:
-    "https://gravatar.com/avatar/b2aecd98f763fccfa425a4fb9329ff4294e4bf4257a166986ed75a02ced26010?v=1778975002000&size=256",
+  gravatarUrl: "/kk.jpg",
 
   // Favicon 配置，文件位置处于 ./public/ 中
   // rel 支持：icon、shortcut icon、apple-touch-icon、manifest
