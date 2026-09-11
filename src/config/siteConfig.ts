@@ -15,7 +15,7 @@ export const siteConfig = {
   description: ["一个简洁、安静的 Astro 博客主题。", "在这里记录想法、故事与日常生活。"],
 
   // 站点 URL（决定 sitemap 和链接的生成；部署前请替换为你的站点地址）
-  siteUrl: "https://misthaven.cnbarrier.com",
+  siteUrl: "https://kkka20.github.io",
 
   // OpenGraph/Twitter 社交元数据总开关，仅生产构建时生效，开启后会在构建时生成分享链接解析后的图片，推荐开启
   generateOpenGraph: false,
