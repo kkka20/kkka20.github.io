@@ -9,10 +9,10 @@ export const siteConfig = {
   title: "Misthaven",
 
   // 站点副标题
-  subTitle: "A calm place for stories and ideas",
+  subTitle: "Welcome to kkka's Personal Blog",
 
   // 站点描述
-  description: ["一个简洁、安静的 Astro 博客主题。", "在这里记录想法、故事与日常生活。"],
+  description: ["欢迎来到我的个人博客", "记录成长，分享点滴"],
 
   // 站点 URL（决定 sitemap 和链接的生成；部署前请替换为你的站点地址）
   siteUrl: "https://kkka20.github.io",
