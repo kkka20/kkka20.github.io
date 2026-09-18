@@ -54,9 +54,14 @@ git commit -m "版本名"
 
 整个流程可以用下面这张图概括：
 
-<img width="966" height="201" alt="image" src="https://github.com/user-attachments/assets/6287272b-8cb8-4df3-ada4-984dab84dd5a" />
-
-
+```
+git add .
+git commit -m
+git status
+工作目录\nWorking Directory
+暂存区\nStaging Area
+本地仓库\nLocal Repo
+```
 
 Git 的三区工作流——从工作目录到暂存区再到本地仓库：
 
