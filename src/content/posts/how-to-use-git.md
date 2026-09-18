@@ -10,9 +10,9 @@
 
 Git 不会自动管理任何文件夹，你得先告诉它："这个目录归你管了。" 这一步叫初始化。进入你的项目目录，敲下第一条命令：
 
-**bash**# 初始化 Git 仓库
 
-```
+```**bash**
+# 初始化 Git 仓库
 git init
 ```
 
@@ -20,9 +20,9 @@ git init
 
 但"追踪"不等于"管理"。你可以用 `git status` 随时检查文件状态——哪些文件是新增的、哪些被修改了。这个命令我几乎每次提交前都要敲一遍，它就像一个随时可以查看的待办清单：
 
-**bash**# 查看当前文件状态
 
-```
+```**bash**
+# 查看当前文件状态
 git status
 ```
 
@@ -30,23 +30,25 @@ git status
 
 要把文件纳入管理，需要用 `git add` 把它们放进暂存区。你可以逐个添加，也可以一把全收：
 
-**bash**# 添加指定文件到暂存区
 
-```
+
+```**bash**
+# 添加指定文件到暂存区
 git add 文件名
 ```
 
-**bash**# 添加所有文件到暂存区
 
-```
+```**bash**
+# 添加所有文件到暂存区
 git add .
 ```
 
 暂存区就相当于一个"草稿箱"，你把要提交的内容放进去，确认无误后再生成一个正式版本：
 
-**bash**# 生成一个新版本
 
-```
+
+```**bash**
+# 生成一个新版本
 git commit -m "版本名"
 ```
 
@@ -69,41 +71,42 @@ Git 的三区工作流——从工作目录到暂存区再到本地仓库：
 
 每次 `commit` 之后，Git 都会生成一个快照，你可以随时回到任何一个历史版本。查看提交记录用 `git log`：
 
-**bash**# 查看提交历史
 
-```
+```**bash**
+# 查看提交历史
 git log
 ```
 
 但 `git log` 有个局限：如果你做了 `reset` 回滚操作，被回滚掉的记录就从 `log` 里消失了。这时候 `git reflog` 就派上用场了——它记录了你的每一次操作，包括回滚本身，相当于一个"操作日志"：
 
-**bash**# 查看所有操作记录（包括已回滚的）
 
-```
+```**bash**
+# 查看所有操作记录（包括已回滚的）
 git reflog
 ```
 
 当你需要查看分支的合并图形时，`--graph` 参数非常有用：
 
-**bash**# 查看分支图形
 
-```
+```**bash**
+# 查看分支图形
 git log --graph
 ```
 
 如果觉得输出太长，可以用简洁版，只显示版本号和提交信息：
 
-**bash**# 简洁版分支图形
 
-```
+```**bash**
+# 简洁版分支图形
 git log --graph --pretty=format:"%h %s"
 ```
 
 找到了目标版本号，就可以用 `git reset` 回到那个时间点：
 
-**bash**# 回滚到指定版本
 
-```
+
+```**bash**
+# 回滚到指定版本
 git reset --hard 版本号
 ```
 
@@ -115,33 +118,35 @@ git reset --hard 版本号
 
 分支是 Git 最强大的特性之一。你可以从当前代码"分叉"出一条平行线，在里面大胆尝试新功能，完全不影响主线代码。创建一个新分支：
 
-**bash**# 创建新分支
 
-```
+
+```**bash**
+# 创建新分支
 git branch 分支名
 ```
 
 查看当前仓库有哪些分支，带 `*` 号的是你当前所在的分支：
 
-**bash**# 查看所有分支
 
-```
+```**bash**
+# 查看所有分支
 git branch
 ```
 
 切换到另一个分支继续工作：
 
-**bash**# 切换分支
 
-```
+
+```**bash**
+# 切换分支
 git checkout 分支名
 ```
 
 当你在分支上完成了开发，需要把改动合并回主线时，先切换到 `master` 分支，再执行合并：
 
-**bash**# 合并前先切回 master
 
-```
+```**bash**
+# 合并前先切回 master
 git checkout master
 git merge 分支
 ```
@@ -152,9 +157,9 @@ git merge 分支
 
 分支合并完成后，如果不再需要这个分支，可以删除它：
 
-**bash**# 删除分支
 
-```
+```**bash**
+# 删除分支
 git branch -d 分支名
 ```
 
@@ -164,17 +169,17 @@ git branch -d 分支名
 
 第一次把本地仓库连接到远程时，需要给远程仓库起个别名（通常叫 `origin`）：
 
-**bash**# 给远程仓库起别名
 
-```
+```**bash**
+# 给远程仓库起别名
 git remote add origin 远程仓库地址
 ```
 
 然后就可以把代码推上去了：
 
-**bash**# 推送代码到远程
 
-```
+```**bash**
+# 推送代码到远程
 git push -u origin 分支
 ```
 
@@ -182,9 +187,9 @@ git push -u origin 分支
 
 如果是从零开始参与一个已有的项目，直接克隆整个仓库到本地：
 
-**bash**# 克隆远程仓库
 
-```
+```**bash**
+# 克隆远程仓库
 git clone 远程仓库地址
 ```
 
@@ -192,9 +197,9 @@ git clone 远程仓库地址
 
 当远程仓库有别人推送的新代码时，你需要拉取到本地：
 
-**bash**# 拉取远程更新
 
-```
+```**bash**
+# 拉取远程更新
 git pull origin 分支
 ```
 
@@ -212,9 +217,9 @@ git pull origin 分支
 
 随着开发推进，提交记录可能变得杂乱：很多次细碎的 `commit`，回过头来看其实可以合并成一条。`git rebase`（变基）就是干这个的，它可以把多个提交记录压缩合并，让历史看起来干净利落。
 
-**bash**# 交互式 rebase，合并最近几条提交
 
-```
+```**bash**
+# 交互式 rebase，合并最近几条提交
 git rebase -i HEAD~版本号
 ```
 
@@ -228,9 +233,9 @@ git rebase -i HEAD~版本号
 
 解决冲突最趁手的工具是 **Beyond Compare**。在 Git 中配置好之后，每次遇到冲突它会自动弹出可视化界面，左右对比一目了然。配置方法如下：
 
-**bash**# 配置 Beyond Compare 为默认合并工具
 
-```
+```**bash**
+# 配置 Beyond Compare 为默认合并工具
 git config --local merge.tool bc3
 git config --local mergetool.path '/usr/local/bin/bcomp'
 git config --local mergetool.keepBackup false
@@ -238,9 +243,9 @@ git config --local mergetool.keepBackup false
 
 配置完成后，遇到冲突时只需执行：
 
-**bash**# 启动 Beyond Compare 解决冲突
 
-```
+```**bash**
+# 启动 Beyond Compare 解决冲突
 git mergetool
 ```
 
