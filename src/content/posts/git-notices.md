@@ -1,6 +1,11 @@
 ---
 title: "Git 学习笔记：从本地仓库到团队协作"
-date: 2026-09-18
+slug: "git-notes"
+description: "从 git init 到分支管理、远程协作与冲突处理，一份 Git 入门笔记的整理与踩坑记录。"
+publishedAt: 2026-09-18
+category: "工具"
+tags: ["Git", "版本控制", "入门"]
+draft: false
 ---
 
 # Git 学习笔记：从本地仓库到团队协作
