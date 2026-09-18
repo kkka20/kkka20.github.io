@@ -21,7 +21,7 @@ export const siteConfig = {
   generateOpenGraph: false,
 
   // 站点维护者
-  owner: "CnBarrier",
+  owner: "kkka",
 
   // 头像链接
   gravatarUrl: "/kk.jpg",
