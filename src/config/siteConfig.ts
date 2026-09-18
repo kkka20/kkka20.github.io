@@ -6,7 +6,7 @@ export const siteConfig = {
   lang: "zh-CN",
 
   // 站点名称
-  title: "Misthaven",
+  title: "Keep going!",
 
   // 站点副标题
   subTitle: "Welcome to kkka's Personal Blog",
