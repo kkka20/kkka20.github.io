@@ -1,3 +1,11 @@
+---
+title: "Ubuntu24.04 安装搜狗输入法踩坑记录"
+description: "Ubuntu24.04部署搜狗输入法全过程，记录踩坑点与解决方案"
+publishedAt: "2026-09-26"
+category: "Linux"
+draft: false
+---
+
 # Ubuntu 24.04 安装搜狗输入法踩坑全记录：从"能打字"到"想砸键盘"再到"真香"
 
 一名计算机学生在 Ubuntu 上折腾输入法时踩过的坑、记下的命令、悟出的道理
