@@ -1,22 +1,34 @@
+---
+title: 130 张图玩转 YOLOv8：实验室物品检测从零微调与网页部署实战
+slug: yolov8-lab-items-detection
+description: 用 130 张图片微调 YOLOv8n 识别烧杯、锥形瓶、试管，从数据标注、训练评估到摄像头与网页部署的完整踩坑记录。
+publishedAt: 2026-10-02
+category: 机器人
+tags: [YOLOv8, 目标检测, ROS2, 深度学习]
+draft: false
+---
+
+# 130 张图玩转 YOLOv8：实验室物品检测从零微调与网页部署实战
+
 > 一个机器人方向、正在学习 ROS2 的学生，为了给机器人视觉节点打基础，从零走通「数据标注 → 微调训练 → 摄像头/网页部署」全流程的真实记录。
-> 最终 130 张图、60 轮训练、两分钟出模型，验证集 **mAP50 = 0.978**。
-> 项目已开源：https://github.com/kkka20/lab-items-yolov8
+
+2026.10.02 · 个人项目实战 · 最终验证集 mAP50 = 0.978
 
 ## 一、为什么做这个
 
-最近在学 ROS2，想给以后的机器人视觉节点打基础，就给自己定了个小目标：**让电脑认出烧杯、锥形瓶、试管三种实验室物品**，并且要用真实器材在摄像头前检验效果，而不是只在数据集里刷分。
+最近在学 ROS2，方向是机器人。机器人要通过摄像头"看懂"周围环境，视觉感知是绕不开的一环，而 YOLO 正是 ROS 生态里做目标检测最常用的模型之一。为了给以后写 ROS2 视觉节点打基础，我给自己定了个小目标：**让电脑认出烧杯、锥形瓶、试管三种实验室物品**，并且要用真实器材在摄像头前检验效果，而不是只在数据集里刷分。
 
-一开始我以为这种项目要很大的数据量、很贵的显卡，做完才发现：YOLOv8n + 迁移学习，130 张图、一张笔记本 4060，训练只花了两分钟。真正花时间的不是训练，而是**数据和踩坑**。这篇文章把完整流程、结果解读和四个坑都记录下来。
+一开始我以为这种项目要很大的数据量、很贵的显卡，做完才发现：YOLOv8n + 迁移学习，130 张图、一张笔记本 4060，训练只花了两分钟。真正花时间的不是训练，而是**数据和踩坑**。这篇文章把完整流程、结果解读和四个坑都记录下来，项目代码已开源：https://github.com/kkka20/lab-items-yolov8
 
 ## 二、最终效果先看为敬
 
 验证集（模型训练时没见过的 26 张图、77 个目标）上的实测：
 
-![检测效果](https://raw.githubusercontent.com/kkka20/lab-items-yolov8/main/runs/lab_items/predict_val/beaker_41a5ccb6-beaker_2.jpg)
+![检测效果-烧杯](https://raw.githubusercontent.com/kkka20/lab-items-yolov8/main/runs/lab_items/predict_val/beaker_41a5ccb6-beaker_2.jpg)
 
-![检测效果](https://raw.githubusercontent.com/kkka20/lab-items-yolov8/main/runs/lab_items/predict_val/erlenmeyer_flask_03cce82a-flask_25.jpg)
+![检测效果-锥形瓶](https://raw.githubusercontent.com/kkka20/lab-items-yolov8/main/runs/lab_items/predict_val/erlenmeyer_flask_03cce82a-flask_25.jpg)
 
-![检测效果](https://raw.githubusercontent.com/kkka20/lab-items-yolov8/main/runs/lab_items/predict_val/test_tube_0b71b0b3-testtube_14.jpg)
+![检测效果-试管](https://raw.githubusercontent.com/kkka20/lab-items-yolov8/main/runs/lab_items/predict_val/test_tube_0b71b0b3-testtube_14.jpg)
 
 最终指标：
 
@@ -27,7 +39,7 @@
 | test_tube 试管 | 0.989 | 0.773 | 0.944 |
 | **总体** | **0.993** | **0.920** | **0.978** |
 
-除了 OpenCV 弹窗，我还做了一个 **Flask 网页版**：浏览器打开页面调用摄像头，画面上实时显示检测框和置信度。
+除了 OpenCV 弹窗，我还做了一个 **Flask 网页版**：浏览器打开页面调用摄像头，画面上实时显示检测框和置信度，演示时比弹窗直观得多。
 
 ## 三、整体流程
 
@@ -119,15 +131,15 @@ model.train(
 )
 ```
 
-RTX 4060 上训练 **约 2 分钟**。我在脚本里还加了个 `Tee` 类，把终端输出同步写进 `train_log.txt`（tqdm 的 `\r` 刷新要转成换行，否则日志里只剩一行），这样训练日志自动落盘，不用每次记得重定向命令。
+RTX 4060 上训练**约 2 分钟**。我在脚本里还加了个 `Tee` 类，把终端输出同步写进 `train_log.txt`（tqdm 的 `\r` 刷新要转成换行，否则日志里只剩一行），这样训练日志自动落盘，不用每次记得重定向命令。
 
 ## 六、第三步：看懂训练输出的一堆图
 
-训练完 `runs/lab_items/` 里会生成一堆文件，这是我以前最懵的部分，逐个解释：
+训练完 `runs/lab_items/` 里会生成一堆文件，这是我以前最懵的部分，逐个解释。
 
 **1. results.png —— 训练体检报告**
 
-![results](https://raw.githubusercontent.com/kkka20/lab-items-yolov8/main/runs/lab_items/results.png)
+![results 训练曲线](https://raw.githubusercontent.com/kkka20/lab-items-yolov8/main/runs/lab_items/results.png)
 
 左列三条 loss（box 定位误差、cls 分类误差、dfl 分布误差）应该**稳步下降**；右列的 mAP 应该稳步上升。如果 loss 不降、暴涨或变成 NaN，就是训练崩了。
 
@@ -135,7 +147,7 @@ RTX 4060 上训练 **约 2 分钟**。我在脚本里还加了个 `Tee` 类，�
 
 ![混淆矩阵](https://raw.githubusercontent.com/kkka20/lab-items-yolov8/main/runs/lab_items/confusion_matrix_normalized.png)
 
-对角线越亮越好（自己就是自己），非对角线亮代表混淆。背景列（background）表示漏检。
+对角线越亮越好（自己就是自己），非对角线亮代表混淆，背景列（background）表示漏检。
 
 **3. BoxPR_curve.png —— P-R 曲线**
 
@@ -170,7 +182,7 @@ while True:
 
 ### 7.2 Flask 网页版（演示效果更好）
 
-OpenCV 弹窗比较朴素，网页版的思路是：**浏览器负责采集摄像头帧，POST 给后端，YOLO 推理画框后回传，前端显示**。后端核心代码：
+OpenCV 弹窗比较朴素，网页版的思路是：**浏览器负责采集摄像头帧，POST 给后端，YOLO 推理画框后回传，页面显示**。后端核心代码：
 
 ```python
 @app.route("/detect", methods=["POST"])
@@ -191,7 +203,7 @@ def detect():
     return jsonify({"image": img_b64, "detections": detections})
 ```
 
-前端每 200ms 抓一帧发请求（约 5 FPS），用上一帧没推理完就跳过的策略避免帧堆积。`python app.py` 后浏览器打开 `http://127.0.0.1:5000` 即可（注意浏览器只允许 localhost/HTTPS 页面调用摄像头）。
+页面每 200ms 抓一帧发请求（约 5 FPS），用上一帧没推理完就跳过的策略避免帧堆积。`python app.py` 后浏览器打开 `http://127.0.0.1:5000` 即可（注意浏览器只允许 localhost/HTTPS 页面调用摄像头）。
 
 ### 7.3 真实器材测试的落差
 
