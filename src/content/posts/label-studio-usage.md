@@ -76,7 +76,7 @@ Label Studio 在 GitHub 开源（Apache 2.0 协议），Star 数过万，社区�
 
 ### 4、与其他工具的差异化定位
 
-![image-20261009093652288](C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20261009093652288.png)
+![image-20261009093652288](/images/label-studio-usage/01.png)
 
 ### 5、选型结论
 
@@ -132,35 +132,35 @@ label-studio start
 
 project name输入项目名称，不输入也不影响使用
 
-![image-20261009090601024](C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20261009090601024.png)
+![image-20261009090601024](/images/label-studio-usage/02.png)
 
 data import导入图片，把图片拖进去就行，一次最大保存100张，可以连续多次拖入
 
-![image-20261009090759139](C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20261009090759139.png)
+![image-20261009090759139](/images/label-studio-usage/03.png)
 
 导入图片后点击labeling setup选择标注类型，YOLOv8选择第三个图片即Object Detection with Bounding Boxes：
 
-![image-20261009090952649](C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20261009090952649.png)
+![image-20261009090952649](/images/label-studio-usage/04.png)
 
 删除原有标签，两个都删除
 
-![d0cdd57e2abf745bef7720cdd06b4bd2](E:\文档\QQ记录\Tencent Files\3328407396\nt_qq\nt_data\Pic\2026-10\Ori\d0cdd57e2abf745bef7720cdd06b4bd2.png)
+![d0cdd57e2abf745bef7720cdd06b4bd2](/images/label-studio-usage/05.png)
 
 添加标签，想要标注几个类就添加几个标签，输入标签名称，点击add添加，如果有多个类，接着输入名称，add添加，添加完所有类标签之后，再点击save进行保存，save键也可能在图片下方
 
-![3971fb613fa94e8f59803855880ae95f](E:\文档\QQ记录\Tencent Files\3328407396\nt_qq\nt_data\Pic\2026-10\Ori\3971fb613fa94e8f59803855880ae95f.png)
+![3971fb613fa94e8f59803855880ae95f](/images/label-studio-usage/06.png)
 
 保存之后点击图片开始进行标注，标注时要尽量贴合目标，如图所示，一个类物体要使用同一类标签，比如three-neck flask是标签1,代表三颈烧瓶，标签raduated cylinder是标签2，代表量筒，标签快捷键是1、2、3，如果标错，点击图片中方框，点击回退键删除，一张图片标注完成后点击下方submit键进行提交，图片会自动跳转到下一张，接着标注
 
-![image-20261009092743990](C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20261009092743990.png)
+![image-20261009092743990](/images/label-studio-usage/07.png)
 
 全部标注完成后，返回上一界面，右上角Export进行导出
 
-![image-20261009093213372](C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20261009093213372.png)
+![image-20261009093213372](/images/label-studio-usage/08.png)
 
 向下翻，选择YOLO with Images，翻到最下面，点击export进行导出，图片标注流程全部完成！！！
 
-![image-20261009093301714](C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20261009093301714.png)
+![image-20261009093301714](/images/label-studio-usage/09.png)
 
 其他使用方法：[【AI数据标注】企业标注流程及label studio打标工具介绍_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1oRxteFEJi/?spm_id_from=333.1391.0.0&vd_source=b02af3695c28eeeb6f52a8c37bf451ce)
 
