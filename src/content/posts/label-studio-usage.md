@@ -1,3 +1,13 @@
+---
+title: Label Studio 使用教程：从安装到标注的完整指南
+slug: label-studio-usage
+description: Label Studio 是一个开源的多模态数据标注平台，本文介绍它的用途、安装方法、标注流程及多人协作方式。
+publishedAt: 2026-10-09
+category: 工具
+tags: [Label Studio, 数据标注, YOLOv8, 教程]
+draft: false
+---
+
 # Label Studio 使用教程：
 
 ## 一、Label Studio 是用来干什么的：
